@@ -4,7 +4,7 @@ import java.util.*;
 import javax.swing.*;
 //estende javax swing
 public class GamePanel extends JPanel implements Runnable{
-
+	//Define constantes para as dimensões da janela do jogo, diâmetro da bola e dimensões da paleta.
 	static final int GAME_WIDTH = 1000;
 	static final int GAME_HEIGHT = (int)(GAME_WIDTH * (0.5555));
 	static final Dimension SCREEN_SIZE = new Dimension(GAME_WIDTH,GAME_HEIGHT);
@@ -19,7 +19,12 @@ public class GamePanel extends JPanel implements Runnable{
 	Paddle paddle2;
 	Ball ball;
 	Score score;
-	
+	/*
+	Inicializa os blocos, bola e pontuação.
+    	Define a janela como focável e adiciona o teclado.
+    	Define a preferência de tamanho da janela.
+    	Inicia uma thread para o loop principal do jogo.
+ 	*/
 	GamePanel(){
 		newPaddles();
 		newBall();
@@ -45,7 +50,7 @@ public class GamePanel extends JPanel implements Runnable{
 		graphics = image.getGraphics();
 		draw(graphics);
 		g.drawImage(image,0,0,this);
-	}
+	}//metodo para pintar na tela
 	public void draw(Graphics g) {
 		paddle1.draw(g);
 		paddle2.draw(g);
@@ -53,12 +58,15 @@ public class GamePanel extends JPanel implements Runnable{
 		score.draw(g);
 Toolkit.getDefaultToolkit().sync(); 
 
-	}
+	}//metodo para desenhar na tela
+	
 	public void move() {
 		paddle1.move();
 		paddle2.move();
 		ball.move();
 	}
+	//atualiza as posições dos blocos e da bola
+	//verifica e manipula as colisoes
 	public void checkCollision() {
 		
 		//colisao das bordas superiores e inferiores
@@ -113,6 +121,7 @@ Toolkit.getDefaultToolkit().sync();
 			System.out.println("Player 1: "+score.player1);
 		}
 	}
+	//Implementa o loop principal do jogo, controlando a movimentação, colisões e redrawing.
 	public void run() {
 		//game loop
 		long lastTime = System.nanoTime();
@@ -132,6 +141,7 @@ Toolkit.getDefaultToolkit().sync();
 		}
 	}
 	//KeyAdapter vem do awt.event
+	//Implementa um adaptador de teclado para lidar com eventos de teclado, repassando para os blocos.
 	public class AL extends KeyAdapter{
 		public void keyPressed(KeyEvent e) {
 			paddle1.keyPressed(e);
