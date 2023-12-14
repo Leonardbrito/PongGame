@@ -6,12 +6,12 @@ public class Paddle extends Rectangle{
 	int id;
 	int yVelocity;
 	int speed = 10;
-	
+	//O construtor recebe as coordenadas x e y, largura e altura da paleta, e um ID para identificar se é a paleta 1 ou 2.
 	Paddle(int x, int y, int PADDLE_WIDTH, int PADDLE_HEIGHT, int id){
 		super(x,y,PADDLE_WIDTH,PADDLE_HEIGHT);
 		this.id=id;
 	}
-	
+	// Define a direção da paleta quando uma tecla é pressionada.
 	public void keyPressed(KeyEvent e) {
 		switch(id) {
 		case 1:
@@ -32,6 +32,7 @@ public class Paddle extends Rectangle{
 			break;
 		}
 	}
+	// Define a direção como zero quando a tecla é liberada.
 	public void keyReleased(KeyEvent e) {
 		switch(id) {
 		case 1:
@@ -52,9 +53,11 @@ public class Paddle extends Rectangle{
 			break;
 		}
 	}
+	//Define a velocidade vertical da paleta.
 	public void setYDirection(int yDirection) {
 		yVelocity = yDirection;
 	}
+	//Atualiza a posição vertical da paleta com base na velocidade.
 	public void move() {
 		y= y + yVelocity;
 	}
