@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
-
+//estende javax swing
 public class GamePanel extends JPanel implements Runnable{
 
 	static final int GAME_WIDTH = 1000;
@@ -61,14 +61,14 @@ Toolkit.getDefaultToolkit().sync();
 	}
 	public void checkCollision() {
 		
-		//bounce ball off top & bottom window edges
+		//colisao das bordas superiores e inferiores
 		if(ball.y <=0) {
 			ball.setYDirection(-ball.yVelocity);
 		}
 		if(ball.y >= GAME_HEIGHT-BALL_DIAMETER) {
 			ball.setYDirection(-ball.yVelocity);
 		}
-		//bounce ball off paddles
+		//bola bate na raquete
 		if(ball.intersects(paddle1)) {
 			ball.xVelocity = Math.abs(ball.xVelocity);
 			ball.xVelocity++; //optional for more difficulty
@@ -89,7 +89,7 @@ Toolkit.getDefaultToolkit().sync();
 			ball.setXDirection(-ball.xVelocity);
 			ball.setYDirection(ball.yVelocity);
 		}
-		//stops paddles at window edges
+		//faz com q os blocos na passem do limite da tela
 		if(paddle1.y<=0)
 			paddle1.y=0;
 		if(paddle1.y >= (GAME_HEIGHT-PADDLE_HEIGHT))
@@ -98,7 +98,8 @@ Toolkit.getDefaultToolkit().sync();
 			paddle2.y=0;
 		if(paddle2.y >= (GAME_HEIGHT-PADDLE_HEIGHT))
 			paddle2.y = GAME_HEIGHT-PADDLE_HEIGHT;
-		//give a player 1 point and creates new paddles & ball
+		
+		//da um ponto ao jogador e reseta o game
 		if(ball.x <=0) {
 			score.player2++;
 			newPaddles();
@@ -130,6 +131,7 @@ Toolkit.getDefaultToolkit().sync();
 			}
 		}
 	}
+	//KeyAdapter vem do awt.event
 	public class AL extends KeyAdapter{
 		public void keyPressed(KeyEvent e) {
 			paddle1.keyPressed(e);
